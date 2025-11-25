@@ -1,4 +1,4 @@
-const API_URL = "https://YOUR_BACKEND_URL_HERE";  // <--- CHANGE THIS
+const API_URL = "https://ask-the-artist-1.onrender.com"; 
 
 const chatWidget = document.getElementById("chat-widget");
 const chatBubble = document.getElementById("chat-bubble");
