@@ -1,11 +1,9 @@
-# backend/app/main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Dict, List
+from typing import Dict
 import os
 
-# Optional: sentence-transformers import if using embeddings
 try:
     from sentence_transformers import SentenceTransformer, util
     EMBEDDING_MODEL = SentenceTransformer("all-MiniLM-L6-v2")
@@ -13,16 +11,13 @@ except Exception:
     EMBEDDING_MODEL = None
 
 app = FastAPI(title="Ask the Artist API")
+
 @app.get("/")
 def home():
     return {"message": "Ask-The-Artist API is running!"}
 
-# CORS - allow your site origin (replace with your actual domain in production)
-FRONTEND_ORIGINS = os.environ.get("FRONTEND_ORIGINS", "*").split(",")  # e.g. "https://yourdomain.com"
-if FRONTEND_ORIGINS == ["*"]:
-    allow_origins = ["*"]
-else:
-    allow_origins = FRONTEND_ORIGINS
+FRONTEND_ORIGINS = os.environ.get("FRONTEND_ORIGINS", "*").split(",")
+allow_origins = ["*"] if FRONTEND_ORIGINS == ["*"] else FRONTEND_ORIGINS
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,9 +27,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-CONTACT_LINK = os.environ.get("CONTACT_LINK", "/contact-us")  # set this in env for production
+CONTACT_LINK = os.environ.get("CONTACT_LINK", "/contact-us")
 
-# Knowledge base - canonical answers (only these will be used)
 KNOWLEDGE = {
     "artist_location": "The artist Neelam and her store are located in Dehradun, Uttarakhand, India.",
     "what_she_makes": "Neelam creates mostly resin art products but also paintings, ceramic items and other unique handmade arts.",
@@ -47,7 +41,6 @@ KNOWLEDGE = {
     "contact": f"For more help or special questions, contact the artist here: {CONTACT_LINK}"
 }
 
-# Short keyword map (for exact matching)
 KEYWORDS = {
     "where": "artist_location",
     "dehradun": "artist_location",
@@ -75,7 +68,6 @@ KEYWORDS = {
 class Query(BaseModel):
     message: str
 
-# Optional: prepare embedding vectors for KNOWLEDGE sentences if embedding model present
 EMBEDDINGS = None
 KB_SENTENCES = list(KNOWLEDGE.values())
 if EMBEDDING_MODEL is not None:
@@ -85,22 +77,21 @@ if EMBEDDING_MODEL is not None:
 def chat(q: Query) -> Dict[str, str]:
     user = q.message.strip().lower()
 
-    # 1) quick keyword match
+    # 1) keyword match
     for token, kb_key in KEYWORDS.items():
         if token in user:
-            return {"reply": KNOWLEDGE[kb_key]}
+            return {"answer": KNOWLEDGE[kb_key]}  # ✅ changed from 'reply' to 'answer'
 
-    # 2) Optional: semantic similarity (if sentence-transformers is available)
+    # 2) semantic similarity
     if EMBEDDING_MODEL is not None and EMBEDDINGS is not None:
         q_emb = EMBEDDING_MODEL.encode(user, convert_to_tensor=True)
         hits = util.semantic_search(q_emb, EMBEDDINGS, top_k=1)
         if hits and hits[0]:
             idx = hits[0][0]["corpus_id"]
             matched_sentence = KB_SENTENCES[idx]
-            # find the knowledge key that contains this sentence
             for k, v in KNOWLEDGE.items():
                 if v == matched_sentence:
-                    return {"reply": v}
+                    return {"answer": v}  # ✅ changed from 'reply' to 'answer'
 
-    # 3) fallback - direct contact invitation
-    return {"reply": KNOWLEDGE["contact"]}
+    # 3) fallback
+    return {"answer": KNOWLEDGE["contact"]}  # ✅ changed from 'reply' to 'answer'
