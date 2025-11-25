@@ -1,22 +1,31 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Ask the Artist - Chat Widget</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask The Artist Widget</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-<div id="ask-artist-widget" class="widget">
-<div class="header">
-<div class="avatar">🎨</div>
-<div class="title">Ask the Artist</div>
+
+<!-- Floating Chat Bubble -->
+<div id="chat-bubble">💬</div>
+
+<!-- Chat Window -->
+<div id="chat-widget" class="hidden">
+    <div class="chat-header">
+        Ask The Artist 🎨
+    </div>
+
+    <div id="chat-body"></div>
+
+    <div class="chat-input-container">
+        <input id="chat-input" type="text" placeholder="Ask something…" />
+        <button id="send-btn">➤</button>
+    </div>
 </div>
-<div id="chat-window" class="chat-window"></div>
-<form id="chat-form" class="chat-form">
-<input id="msg" autocomplete="off" placeholder="Ask Neelam about art, pickup, or gifts..." />
-<button type="submit">Send</button>
-</form>
-</div>
+
 <script src="widget.js"></script>
 </body>
 </html>
