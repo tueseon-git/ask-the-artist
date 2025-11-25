@@ -13,6 +13,9 @@ except Exception:
     EMBEDDING_MODEL = None
 
 app = FastAPI(title="Ask the Artist API")
+@app.get("/")
+def home():
+    return {"message": "Ask-The-Artist API is running!"}
 
 # CORS - allow your site origin (replace with your actual domain in production)
 FRONTEND_ORIGINS = os.environ.get("FRONTEND_ORIGINS", "*").split(",")  # e.g. "https://yourdomain.com"
