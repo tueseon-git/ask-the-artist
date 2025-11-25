@@ -1,0 +1,6 @@
+fastapi==0.121.3
+uvicorn==0.18.3
+python-multipart==0.0.5
+sentence-transformers==2.2.2   # optional (only if you want embeddings)
+torch==2.2.0                    # sentence-transformers dependency
+transformers==4.40.0            # optional

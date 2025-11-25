@@ -1,0 +1,13 @@
+/* Artistic chat widget styles */
+#ask-artist-widget { width: 340px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    font-family: 'Segoe UI', Roboto, Arial; overflow: hidden; background: linear-gradient(180deg,#fffaf0,#fff7f2); }
+    .header{ display:flex; align-items:center; gap:8px; padding:12px; background: linear-gradient(90deg,#ffd6b3,#fff); }
+    .avatar { font-size:24px; }
+    .title { font-weight:700; color:#5b3a29; font-size:16px; }
+    .chat-window { height:320px; overflow:auto; padding:12px; background: rgba(255,255,255,0.6);}
+    .msg { margin:8px 0; padding:8px 10px; border-radius:10px; max-width:80%; }
+    .user { align-self:flex-end; background:#fff;}
+    .bot { background:#fdebd3; color:#332211; }
+    .chat-form { display:flex; gap:8px; padding:10px; border-top:1px solid rgba(0,0,0,0.05); }
+    .chat-form input { flex:1; padding:8px 10px; border-radius:8px; border:1px solid #e8d7c9; }
+    .chat-form button { background:#d9882b; border:none; padding:8px 12px; border-radius:8px; color:white; }
