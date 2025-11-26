@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict
 import os
 
+# Optional embedding model
 try:
     from sentence_transformers import SentenceTransformer, util
     EMBEDDING_MODEL = SentenceTransformer("all-MiniLM-L6-v2")
@@ -12,10 +13,12 @@ except Exception:
 
 app = FastAPI(title="Ask the Artist API")
 
+# Root endpoint for Render
 @app.get("/")
 def home():
     return {"message": "Ask-The-Artist API is running!"}
 
+# CORS
 FRONTEND_ORIGINS = os.environ.get("FRONTEND_ORIGINS", "*").split(",")
 allow_origins = ["*"] if FRONTEND_ORIGINS == ["*"] else FRONTEND_ORIGINS
 
@@ -27,8 +30,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Contact link (environment override allowed)
 CONTACT_LINK = os.environ.get("CONTACT_LINK", "/contact-us")
 
+# KNOWLEDGE BASE
 KNOWLEDGE = {
     "artist_location": "The artist Neelam and her store are located in Dehradun, Uttarakhand, India.",
     "what_she_makes": "Neelam creates mostly resin art products but also paintings, ceramic items and other unique handmade arts.",
@@ -41,6 +46,7 @@ KNOWLEDGE = {
     "contact": f"For more help or special questions, contact the artist here: {CONTACT_LINK}"
 }
 
+# SIMPLE KEYWORD TRIGGERS
 KEYWORDS = {
     "where": "artist_location",
     "dehradun": "artist_location",
@@ -48,18 +54,25 @@ KEYWORDS = {
     "resin": "what_she_makes",
     "painting": "what_she_makes",
     "ceramic": "what_she_makes",
+
     "custom": "customised",
     "personal": "customised",
+
     "gift": "youtube_gift",
     "subscribe": "youtube_gift",
+
     "shipping": "shipping",
+    "pickup": "shipping",
+
     "order": "order",
     "buy": "order",
+
     "contact": "contact",
-    "pickup": "shipping",
+
     "pooja": "categories",
     "diwali": "categories",
     "jewelry": "categories",
+
     "utilities": "utilities",
     "phone stand": "utilities",
     "store": "artist_location"
@@ -68,8 +81,10 @@ KEYWORDS = {
 class Query(BaseModel):
     message: str
 
+# Load semantic embeddings
 EMBEDDINGS = None
 KB_SENTENCES = list(KNOWLEDGE.values())
+
 if EMBEDDING_MODEL is not None:
     EMBEDDINGS = EMBEDDING_MODEL.encode(KB_SENTENCES, convert_to_tensor=True)
 
@@ -77,21 +92,20 @@ if EMBEDDING_MODEL is not None:
 def chat(q: Query) -> Dict[str, str]:
     user = q.message.strip().lower()
 
-    # 1) keyword match
+    # 1) Keyword matching
     for token, kb_key in KEYWORDS.items():
         if token in user:
-            return {"answer": KNOWLEDGE[kb_key]}  # ✅ changed from 'reply' to 'answer'
+            return {"answer": KNOWLEDGE[kb_key]}
 
-    # 2) semantic similarity
+    # 2) Semantic similarity (if model loaded)
     if EMBEDDING_MODEL is not None and EMBEDDINGS is not None:
         q_emb = EMBEDDING_MODEL.encode(user, convert_to_tensor=True)
         hits = util.semantic_search(q_emb, EMBEDDINGS, top_k=1)
+
         if hits and hits[0]:
             idx = hits[0][0]["corpus_id"]
             matched_sentence = KB_SENTENCES[idx]
-            for k, v in KNOWLEDGE.items():
-                if v == matched_sentence:
-                    return {"answer": v}  # ✅ changed from 'reply' to 'answer'
+            return {"answer": matched_sentence}
 
-    # 3) fallback
-    return {"answer": KNOWLEDGE["contact"]}  # ✅ changed from 'reply' to 'answer'
+    # 3) Fallback
+    return {"answer": KNOWLEDGE["contact"]}
