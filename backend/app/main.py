@@ -36,12 +36,14 @@ CONTACT_LINK = os.environ.get("CONTACT_LINK", "/contact-us")
 # KNOWLEDGE BASE
 KNOWLEDGE = {
     "artist_location": "The artist Neelam and her store are located in Dehradun, Uttarakhand, India.",
-    "what_she_makes": "Neelam creates mostly resin art products but also paintings, ceramic items and other unique handmade arts.",
+    "what_she_makes": "Neelam creates mostly resin art products but also paintings, ceramic items and other unique handmade arts. Resin art categories include home decoration, gifting items, resin jewellery, keychains, and Pooja/Diwali items.",
     "customised": "Personalised or customised resin products are available in limited categories.",
     "categories": "Resin art categories include home decoration, gifting items, resin jewellery, keychains, and Pooja/Diwali items.",
     "utilities": "Stylish utilities available include phone stands, mini storage boxes, pooja thali, keychains, cup coasters and bookmarks.",
     "youtube_gift": "If you are a subscriber of https://www.youtube.com/@art_by_neelam you can pick one free resin gift from the store.",
     "shipping": "Shipping is currently not available; items must be picked up from the store.",
+    "intro": "Hi, I am AI assistant chatbot, you can ask me for any question.",
+    "exhibition": "Neelam participates in seasonal exhibitons/events, Check the below Events section for all done or upcoming exhibitions.",
     "order": "To order, please contact the artist directly via the YouTube channel: https://www.youtube.com/@art_by_neelam",
     "contact": f"For more help or special questions, contact the artist here: {CONTACT_LINK}"
 }
@@ -51,17 +53,33 @@ KEYWORDS = {
     "where": "artist_location",
     "dehradun": "artist_location",
     "location": "artist_location",
+    "located": "artist_location",
+    "country": "artist_location",
     "resin": "what_she_makes",
     "painting": "what_she_makes",
     "ceramic": "what_she_makes",
 
     "custom": "customised",
     "personal": "customised",
+    "hello": "intro",
+    "hi": "intro",
+    "query": "intro",
+    "question": "intro",
+    "help": "intro",
+    "what is this": "intro",
+    "who are you": "intro",
+    "you": "intro",
 
     "gift": "youtube_gift",
     "subscribe": "youtube_gift",
+    "discount": "youtube_gift",
+    "free": "youtube_gift",
+    "deal": "youtube_gift",
+    "bulk": "youtube_gift",
 
     "shipping": "shipping",
+    "outside dehradun": "shipping",
+    "not in dehradun": "shipping",
     "pickup": "shipping",
 
     "order": "order",
@@ -72,10 +90,20 @@ KEYWORDS = {
     "pooja": "categories",
     "diwali": "categories",
     "jewelry": "categories",
+    "resin art": "categories",
+    "resin gift": "categories",
+    "epoxy resin": "categories",
+    "gift idea": "categories",
+    "epoxy": "categories",
 
     "utilities": "utilities",
     "phone stand": "utilities",
-    "store": "artist_location"
+    "store": "artist_location",
+
+    "exhibition": "exhibition",
+    "exhibitions": "exhibition",
+    "event": "exhibition",
+    "marketing": "exhibition"
 }
 
 class Query(BaseModel):
