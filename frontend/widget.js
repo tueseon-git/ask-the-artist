@@ -1,4 +1,4 @@
-const API_URL = "https://ask-the-artist-1.onrender.com/chat"; 
+const API_URL = "https://ask-the-artist-1.onrender.com/chat";
 
 const chatWidget = document.getElementById("chat-widget");
 const chatBubble = document.getElementById("chat-bubble");
@@ -6,7 +6,7 @@ const chatBody = document.getElementById("chat-body");
 const chatInput = document.getElementById("chat-input");
 const sendBtn = document.getElementById("send-btn");
 
-// Toggle widget
+// Toggle widget visibility
 chatBubble.addEventListener("click", () => {
     chatWidget.classList.toggle("hidden");
 });
@@ -41,16 +41,20 @@ async function sendMessage() {
     chatBody.scrollTop = chatBody.scrollHeight;
 
     try {
-        const res = await fetch(`${API_URL}/ask`, {
+        const res = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question: text })
+            body: JSON.stringify({ message: text })   // ✅ FIXED
         });
 
         const data = await res.json();
 
         typing.remove();
-        addMessage(data.answer || "No response", "bot");
+
+        addMessage(
+            data.answer || "No response from server.",   // ✅ FIXED
+            "bot"
+        );
 
     } catch (err) {
         typing.remove();
