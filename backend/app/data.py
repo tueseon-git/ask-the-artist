@@ -1,2 +1,2 @@
 # Put any static data, contact link or extended KB here.
-CONTACT_URL = "/contact-us"
+CONTACT_URL = "https://tueseon.com/contact-us"
