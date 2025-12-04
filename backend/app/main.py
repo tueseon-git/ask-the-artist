@@ -31,7 +31,7 @@ app.add_middleware(
 )
 
 # Contact link (environment override allowed)
-CONTACT_LINK = os.environ.get("CONTACT_LINK", "/contact-us")
+CONTACT_LINK = os.environ.get("CONTACT_LINK", "https://tueseon.com/contact-us")
 
 # KNOWLEDGE BASE
 KNOWLEDGE = {
