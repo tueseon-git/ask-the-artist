@@ -1,3 +1,5 @@
+# Right now main.py is not using ths file, instead main.py has its seperate code for this in itself.
+
 # Optional wrapper if you want to isolate embedding logic here
 from sentence_transformers import SentenceTransformer, util
 
