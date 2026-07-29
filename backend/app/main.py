@@ -35,7 +35,7 @@ CONTACT_LINK = os.environ.get("CONTACT_LINK", "https://tueseon.com/contact-us")
 
 # KNOWLEDGE BASE
 KNOWLEDGE = {
-    "artist_location": "The artist Neelam and her store is located in India.",
+    "artist_location": "The artist Neelam and her store are located in India.",
     "what_she_makes": "Neelam creates mostly resin art products but also paintings, ceramic items and other unique handmade arts. Resin art categories include home decoration, gifting items, resin jewellery, keychains, and Pooja/Diwali items.",
     "customised": "Personalised or customised resin products are available in limited categories.",
     "categories": "Resin art categories include home decoration, gifting items, resin jewellery, keychains, and Pooja/Diwali items.",
