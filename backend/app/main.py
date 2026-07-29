@@ -40,11 +40,11 @@ KNOWLEDGE = {
     "customised": "Personalised or customised resin products are available in limited categories.",
     "categories": "Resin art categories include home decoration, gifting items, resin jewellery, keychains, and Pooja/Diwali items.",
     "utilities": "Stylish utilities available include phone stands, mini storage boxes, pooja thali, keychains, cup coasters and bookmarks.",
-    "youtube_gift": "If you are a subscriber of https://www.youtube.com/@art_by_neelam you can pick one free resin gift from the store.",
+    "youtube_gift": "If you are a subscriber of https://www.youtube.com/@artbyneelam333 or instagram https://www.instagram.com/artbyneelam333 you can pick one free resin gift from the store.",
     "shipping": "Shipping is currently not available; items must be picked up from the store.",
     "intro": "Hi, I am AI assistant chatbot, you can ask me for any question.",
     "exhibition": "Neelam participates in seasonal exhibitons/events, Check the below Events section for all done or upcoming exhibitions.",
-    "order": "To order, please contact the artist directly via the YouTube channel: https://www.youtube.com/@art_by_neelam",
+    "order": "To order, please contact the artist directly via the YouTube channel: https://www.youtube.com/@artbyneelam333" or instagram https://www.instagram.com/artbyneelam333,
     "contact": f"For more help or special questions, contact the artist here: {CONTACT_LINK}"
 }
 
