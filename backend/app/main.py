@@ -44,7 +44,7 @@ KNOWLEDGE = {
     "shipping": "Shipping is currently not available; items must be picked up from the store.",
     "intro": "Hi, I am AI assistant chatbot, you can ask me for any question.",
     "exhibition": "Neelam participates in seasonal exhibitons/events, Check the below Events section for all done or upcoming exhibitions.",
-    "order": "To order, please contact the artist directly via the YouTube channel: https://www.youtube.com/@artbyneelam333" or instagram https://www.instagram.com/artbyneelam333,
+    "order": "To order, please contact the artist directly via the YouTube channel: https://www.youtube.com/@artbyneelam333 or instagram https://www.instagram.com/artbyneelam333.",
     "contact": f"For more help or special questions, contact the artist here: {CONTACT_LINK}"
 }
 
